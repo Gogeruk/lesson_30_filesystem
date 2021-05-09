@@ -1,0 +1,143 @@
+//////..............\\\\\\//////..............\\\\\\//////..............\\\\\\
+//////..............\\\\\\//////..............\\\\\\//////..............\\\\\\
+//////..............\\\\\\//////..............\\\\\\//////..............\\\\\\
+
+Интегрировать Laravel проект с любым облачным файловым хранилищем
+ кроме Amazon S3 и Google Cloud Storage.
+
+
+    1. Создать ПРИВАТНУЮ и публичную секцию
+     (если позволяет сервис)
+     https://help.dropbox.com/files-folders/share/public-folder
+     "public is disabled in dropbox"
+
+    2. Реализовать форма(ы)
+     для загрузки файла в ПРИВАТНУЮ и публичную секции
+
+    3. В качестве ответа отдать ссылки на файлы
+     (временные если доступно)
+
+https://www.youtube.com/watch?v=g8iMnoWtS4I
+//////..............\\\\\\//////..............\\\\\\//////..............\\\\\\
+//////..............\\\\\\//////..............\\\\\\//////..............\\\\\\
+//////..............\\\\\\//////..............\\\\\\//////..............\\\\\\
+
+............................................
+//////////////    DO STUFF    //////////////
+............................................
+
+1.
+Need to write html I guess.
+
+2.
+I will be using dropbox +
+ https://github.com/spatie/flysystem-dropbox
+
+hopfully everything will be fine
+NOPE
+Probobly a better solution is:
+https://github.com/benjamincrozat/laravel-dropbox-driver
+
+
+php artisan make:controller DropBoxController
+
+
+
+https://www.dropbox.com/install
+https://www.dropbox.com/home
+
+
+APP_KEY: 7h985eu5gjbxxy7
+APP_SECRET:	33pe4wjz5dulhw4
+ACCESS_TOKEN: sl.AwZYmKIz4n_YSU92L_ZHQq_rQA9i6Evv1DXFVP6s1oP6C6V5JB_9LOTs4EDnlYp_DgF3B_kwQ69Y1QO00JQHNagxE3KdVnNGNXqY8E1Dl6AeApvxvGkCE6ZAS_TFUSq4kjD4L4E
+
+new
+YIQ4sFDdjroAAAAAAAAAAdF_Rw4HVFBm5fwDrr_9RXK98tqdfAtVsNeo64LdkuAt
+
+ACCESS_TOKEN=YIQ4sFDdjroAAAAAAAAAAdF_Rw4HVFBm5fwDrr_9RXK98tqdfAtVsNeo64LdkuAt
+
+
+
+https://github.com/benjamincrozat/laravel-dropbox-driver
+
+
+
+
+
+"spatie/flysystem-dropbox": "^2.0",
+"benjamincrozat/laravel-dropbox-driver": "^3.0"
+
+GUIDE for s3   EXAMPLE
+https://chrisblackwell.medium.com/upload-files-to-aws-s3-using-laravel-1cf0e654c2f3
+
+
+GET TEMP LINK
+
+curl -X POST https://api.dropboxapi.com/2/files/get_temporary_link \
+    --header "Authorization: Bearer QpZGQfKECWsAAAAAAAAAAUisfq_Dmjbg-8433J9uCFzH0_CBUa_dbVN97EId1wNC" \
+    --header "Content-Type: application/json" \
+    --data "{\"path\": \"/Apps/Gogeruk_private_ap/qwsse.jpg\"}"
+
+
+
+
+
+
+
+    |        |        |        |        |        |        |        |        |
+  //|\\    //|\\    //|\\    //|\\    //|\\    //|\\    //|\\    //|\\    //|\\
+ ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\
+////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\
+\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////
+ \\\|///  \\\|///  \\\|///  \\\|///  \\\|///  \\\|///  \\\|///  \\\|///  \\\|///
+  \\|//    \\|//    \\|//    \\|//    \\|//    \\|//    \\|//    \\|//    \\|//
+    |        |        |        |        |        |        |        |        |
+
+
+// SOS FOR LARAVEL DOCKER SET UP
+https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose
+///////////...\\\\\\\\\\\
+
+
+// START
+cd www
+docker-compose up -d
+php artisan key:generate
+
+// CONFIG DB AND MAKE A USER
+docker-compose exec db bash
+mysql -u root -p
+GRANT ALL PRIVILEGES  ON laravel.* TO 'laraveluser'@'%' IDENTIFIED BY 'secret';
+FLUSH PRIVILEGES;
+EXIT;
+exit
+
+// CHANGE .env WITH CREDS
+nnao .env
+
+// SEEDING
+docker-compose exec app bash start.bash
+
+// CONNECT TO DB
+docker exec -it db mysql -u laraveluser -p
+THEN INPUT A PASSWORD: "secret"
+
+// TO STOP
+docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+
+
+
+// IMPORTNT
+docker-compose exec app bash start.bash
+// IMPORTNT
+
+
+
+    |        |        |        |        |        |        |        |        |
+  //|\\    //|\\    //|\\    //|\\    //|\\    //|\\    //|\\    //|\\    //|\\
+ ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\  ///|\\\
+////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\////|\\\\
+\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////\\\\|////
+ \\\|///  \\\|///  \\\|///  \\\|///  \\\|///  \\\|///  \\\|///  \\\|///  \\\|///
+  \\|//    \\|//    \\|//    \\|//    \\|//    \\|//    \\|//    \\|//    \\|//
+    |        |        |        |        |        |        |        |        |
